@@ -17,9 +17,19 @@ dependencies {
 	testCompile 'junit:junit:4.12'
 }
 
+task sourceJar(type: Jar) {
+	from sourceSets.main.allJava
+}
+
 publishing {
 	publications {
-		mavenJava(MavenPublication) { from components.java  }
+		mavenJava(MavenPublication) { 
+			from components.java
+			
+			artifact sourceJar {
+				classifier "sources"
+			}
+		}
 	}
 }
 
