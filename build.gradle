@@ -1,0 +1,30 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+
+version = '1.0'
+group = 'fork3'
+
+repositories {
+	jcenter()
+	maven { url 'https://raw.githubusercontent.com/fork3/mvn-repo/master' }
+}
+
+dependencies {
+	compile group: 'fork3', name: 'f3-commons-reflection', version: '1.0'
+	compile group: 'javax.inject', name: 'javax.inject', version: '1'
+	compile 'org.projectlombok:lombok:1.16.10'
+	testCompile 'junit:junit:4.12'
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) { from components.java  }
+	}
+}
+
+publishing {
+	repositories {
+		maven { url 'build/repository' }
+	}
+}
